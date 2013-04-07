@@ -7,5 +7,5 @@ for (i in 1:10000) {if (grepl("method",surowe_dane[i])) NULL else if (grepl("err
 przepisane_dane
 
 dca_raw <- c(0)
-for (i in 1:length(przepisane_dane)) {if (grepl("alice",przepisane_dane[i])) dca_raw=c(dca_raw,przepisane_dane[i+1])}
+for (i in 1:length(przepisane_dane)) {if (grepl("alice",przepisane_dane[i])) if (grepl("variant",przepisane_dane[i+1])) dca_raw=c(dca_raw,przepisane_dane[i+1])}
 dca_raw
