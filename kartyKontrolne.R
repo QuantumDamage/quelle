@@ -36,12 +36,7 @@ for(infile in dir(file.dir, pattern="\\.txt$")) {
   qber_data_frame<-qber_data_frame[qber_data_frame$qber!=0, ]
   write.csv(qber_data_frame,paste(file.dir,outfile_csv,sep=""))
   
-  library(ggplot2)
-  
-  p <- ggplot(qber_data_frame, aes(x=line, y=qber))
-  p <- p+geom_line()
-  p
-  ggsave(file=paste(file.dir,outfile_eps,sep=""))
+  qber_data_frame
   
   #zakonczenie iteracji po plikach:
 }
