@@ -1,5 +1,5 @@
 #rozpoczecie iteracji po plikach jak tu: http://stackoverflow.com/a/4855916/993324
-file.dir <- "~/Dropbox/quelle/test/"
+file.dir <- "~/Dropbox/quelle/czas/"
 for(infile in dir(file.dir, pattern="\\.txt$")) {
   outfile_csv <- gsub("\\.txt","\\.csv", infile)
   outfile_eps <- gsub("\\.txt","\\.eps", infile)
@@ -31,12 +31,15 @@ for(infile in dir(file.dir, pattern="\\.txt$")) {
     }
   }
   
-  qber_data_frame
-  colnames(qber_data_frame) <- c("line", "qber")
+  colnames(qber_data_frame) <- c("line", "qber","sec","min","hour")
   qber_data_frame<-qber_data_frame[qber_data_frame$qber!=0, ]
   write.csv(qber_data_frame,paste(file.dir,outfile_csv,sep=""))
   
   qber_data_frame
-  
+  library(qcc)
+  wykres<-qcc(qber_data_frame$qber,"xbar.one")
+  postscript(paste(file.dir,outfile_eps,sep=""))
+  plot(wykres)
+  dev.off()
   #zakonczenie iteracji po plikach:
 }
