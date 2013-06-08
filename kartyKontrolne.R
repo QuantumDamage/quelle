@@ -6,6 +6,7 @@ for(infile in dir(file.dir, pattern="\\.txt$")) {
   
   przepisane_dane <- vector()
   #qber_data_frame <- data.frame()
+  qber_data_frame_short <- data.frame()
   
   surowe_dane <- scan(paste(file.dir,infile,sep=""), character(0), sep = "\n")
   for (i in 1: length(surowe_dane) ) {
@@ -36,8 +37,13 @@ for(infile in dir(file.dir, pattern="\\.txt$")) {
   write.csv(qber_data_frame,paste(file.dir,outfile_csv,sep=""))
   
   qber_data_frame
+  qber_data_frame_short
+  for (i in 1:length(qber_data_frame$qber)) {
+    if (i%%2)
+      if (!is.na(qber_data_frame$qber[i])) qber_data_frame_short<-rbind(qber_data_frame_short,qber_data_frame[i,])
+  }
   library(qcc)
-  wykres<-qcc(qber_data_frame$qber,"xbar.one")
+  wykres<-qcc(qber_data_frame_short$qber,"xbar.one")
   postscript(paste(file.dir,outfile_eps,sep=""))
   plot(wykres)
   dev.off()
