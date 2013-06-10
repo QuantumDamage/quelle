@@ -1,5 +1,5 @@
 #rozpoczecie iteracji po plikach jak tu: http://stackoverflow.com/a/4855916/993324
-file.dir <- "~/Dropbox/quelle/czas/"
+file.dir <- "~/Dropbox/quelle/czas/zrobione/"
 for(infile in dir(file.dir, pattern="\\.txt$")) {
   outfile_csv <- gsub("\\.txt","\\.csv", infile)
   outfile_eps <- gsub("\\.txt","\\.eps", infile)
@@ -43,9 +43,9 @@ for(infile in dir(file.dir, pattern="\\.txt$")) {
       if (!is.na(qber_data_frame$qber[i])) qber_data_frame_short<-rbind(qber_data_frame_short,qber_data_frame[i,])
   }
   library(qcc)
-  wykres<-qcc(qber_data_frame_short$qber,"xbar.one")
+  wykres<-qcc((qber_data_frame_short$qber)*100,"xbar.one")
   postscript(paste(file.dir,outfile_eps,sep=""))
-  plot(wykres)
+  plot(wykres, title="Wartość QBER w kolejnych iteracjach", xlab="Iteracja procesu", ylab="QBER [%]")
   dev.off()
   #zakonczenie iteracji po plikach:
 }
